@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using test.Models;
 
 namespace test.Migrations
 {
     [DbContext(typeof(CukierniaDbContext))]
-    [Migration("20200704142647_UpdatedTables4")]
-    partial class UpdatedTables4
+    partial class CukierniaDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,13 +159,13 @@ namespace test.Migrations
 
             modelBuilder.Entity("test.Models.Zamowienie_WyrobCukierniczy", b =>
                 {
-                    b.HasOne("test.Models.Zamowienie", "Zamowienie")
+                    b.HasOne("test.Models.WyrobCukierniczy", "WyrobCukierniczy")
                         .WithMany("Zamowienie_WyrobCukierniczy")
                         .HasForeignKey("IdWyrobuCukierniczego")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("test.Models.WyrobCukierniczy", "WyrobCukierniczy")
+                    b.HasOne("test.Models.Zamowienie", "Zamowienie")
                         .WithMany("Zamowienie_WyrobCukierniczy")
                         .HasForeignKey("IdZamowienia")
                         .OnDelete(DeleteBehavior.Cascade)

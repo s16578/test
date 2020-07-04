@@ -10,8 +10,8 @@ using test.Models;
 namespace test.Migrations
 {
     [DbContext(typeof(CukierniaDbContext))]
-    [Migration("20200704142852_UpdatedTables5")]
-    partial class UpdatedTables5
+    [Migration("20200704143433_Updated2")]
+    partial class Updated2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
