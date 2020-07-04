@@ -13,7 +13,7 @@ namespace test.Configuration
         public void Configure(EntityTypeBuilder<Pracownik> builder)
         {
             builder
-                .HasKey(e => e.IdPracownika);
+                .HasKey(e => e.IdPracownik);
 
             builder
                 .Property(e => e.Imie)

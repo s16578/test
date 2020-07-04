@@ -13,6 +13,7 @@ namespace test.Models
         public DbSet<Zamowienie> Zamowienia { get; set; }
         public DbSet<Klient> Klientci { get; set; }
         public DbSet<WyrobCukierniczy> WyrobyCukiernicze { get; set; }
+        public DbSet<Zamowienie_WyrobCukierniczy> Zamowienie_WyrobCukierniczy { get; set; }
         public CukierniaDbContext()
         {
 
@@ -31,6 +32,8 @@ namespace test.Models
             modelBuilder.ApplyConfiguration(new ZamowienieEfConfiguration());
             modelBuilder.ApplyConfiguration(new KlientEfConfiguration());
             modelBuilder.ApplyConfiguration(new WyrobCukierniczyEfConfiguration());
+            modelBuilder.ApplyConfiguration(new Zamowienie_WyrobCukerniczyEfConfiguration());
+
         }
     }
 }

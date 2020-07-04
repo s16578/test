@@ -11,5 +11,6 @@ namespace test.Models
         public string Nazwa { get; set; }
         public float CenaZaSztuke { get; set; }
         public string Typ { get; set; }
+        public ICollection<Zamowienie_WyrobCukierniczy> Zamowienie_WyrobCukierniczy { get; set; }
     }
 }

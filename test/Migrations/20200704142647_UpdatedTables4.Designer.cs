@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using test.Models;
 
 namespace test.Migrations
 {
     [DbContext(typeof(CukierniaDbContext))]
-    partial class CukierniaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200704142647_UpdatedTables4")]
+    partial class UpdatedTables4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace test.Migrations
 
             modelBuilder.Entity("test.Models.Pracownik", b =>
                 {
-                    b.Property<int>("IdPracownika")
+                    b.Property<int>("IdPracownik")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -58,7 +60,7 @@ namespace test.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.HasKey("IdPracownika");
+                    b.HasKey("IdPracownik");
 
                     b.ToTable("Pracownicy");
                 });
@@ -107,34 +109,69 @@ namespace test.Migrations
                     b.Property<int>("IdPracownik")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KlientIdKlient")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PracownikIdPracownika")
-                        .HasColumnType("int");
-
                     b.Property<string>("Uwagi")
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 
                     b.HasKey("IdZamowienia");
 
-                    b.HasIndex("KlientIdKlient");
+                    b.HasIndex("IdKlient");
 
-                    b.HasIndex("PracownikIdPracownika");
+                    b.HasIndex("IdPracownik");
 
                     b.ToTable("Zamowienia");
+                });
+
+            modelBuilder.Entity("test.Models.Zamowienie_WyrobCukierniczy", b =>
+                {
+                    b.Property<int>("IdWyrobuCukierniczego")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdZamowienia")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Ilosc")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Uwagi")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.HasKey("IdWyrobuCukierniczego", "IdZamowienia");
+
+                    b.HasIndex("IdZamowienia");
+
+                    b.ToTable("Zamowienie_WyrobCukierniczy");
                 });
 
             modelBuilder.Entity("test.Models.Zamowienie", b =>
                 {
                     b.HasOne("test.Models.Klient", "Klient")
                         .WithMany("Zamowienia")
-                        .HasForeignKey("KlientIdKlient");
+                        .HasForeignKey("IdKlient")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("test.Models.Pracownik", "Pracownik")
                         .WithMany("Zamowienia")
-                        .HasForeignKey("PracownikIdPracownika");
+                        .HasForeignKey("IdPracownik")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("test.Models.Zamowienie_WyrobCukierniczy", b =>
+                {
+                    b.HasOne("test.Models.Zamowienie", "Zamowienie")
+                        .WithMany("Zamowienie_WyrobCukierniczy")
+                        .HasForeignKey("IdWyrobuCukierniczego")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("test.Models.WyrobCukierniczy", "WyrobCukierniczy")
+                        .WithMany("Zamowienie_WyrobCukierniczy")
+                        .HasForeignKey("IdZamowienia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

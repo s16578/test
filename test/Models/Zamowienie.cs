@@ -8,18 +8,17 @@ namespace test.Models
 {
     public class Zamowienie
     {
-        internal object idklient;
-
         public int IdZamowienia { get; set; }
         public DateTime DataPrzyjecia { get; set; }
         public DateTime? DataRealizacji { get; set; }
         public string Uwagi { get; set; }
-        [ForeignKey("IdKlient")]
         public int IdKlient { get; set; }
+        [ForeignKey("IdKlient")]
         public virtual Klient Klient { get; set; }
-        [ForeignKey("IdPracownik")]
         public int IdPracownik { get; set; }
+        [ForeignKey("IdPracownik")]
         public virtual Pracownik Pracownik { get; set; }
+        public ICollection<Zamowienie_WyrobCukierniczy> Zamowienie_WyrobCukierniczy { get; set; }
 
     }
 }

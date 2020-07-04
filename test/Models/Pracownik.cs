@@ -7,7 +7,7 @@ namespace test.Models
 {
     public class Pracownik
     {
-        public int IdPracownika { get; set; }
+        public int IdPracownik { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public virtual ICollection<Zamowienie> Zamowienia { get; set; }
